@@ -36,7 +36,13 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
 .main-container {
   min-height: calc(100vh - #{$navbar_height} - #{$footer-height});
+  margin: 0 auto;
+}
+
+.main-container-content {
+  width: 80vw;
   margin: 0 auto;
 }

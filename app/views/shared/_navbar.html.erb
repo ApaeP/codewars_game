@@ -1,9 +1,11 @@
 <nav class="navbar">
-  <div class="navbar-content">
-    <%= link_to "Home", root_path %>
+  <div class="navbar-content-centerer">
+    <div class="navbar-content">
+      <%= link_to "Home", root_path %>
+      <%= link_to "Fetch katas", fetch_katas_path if user_signed_in? %>
+      <%= link_to "Build katas", build_katas_path, method: :patch if user_signed_in? %>
+      <%= link_to "Connection", new_user_session_path unless user_signed_in? %>
+    </div>
   </div>
 </nav>
 
-<style>
-
-</style>

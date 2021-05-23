@@ -1,2 +1,18 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1 style="margin: 0;">Pages#home</h1>
+<div class="container">
+  katas completés : <%= current_user.katas.count %>
+  <br>
+  <br>
+  <br>
+  <br>
+  katas :
+  <ol style="line-height: 0.2rem;">
+    <% current_user.katas.each do |kata| %>
+      <li>
+        <p>
+          <%= kata.title %> <%= link_to "build", build_kata_path(kata), method: :patch %>
+        </p>
+      </li>
+    <% end %>
+  </ol>
+</div>

@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_203722) do
+ActiveRecord::Schema.define(version: 2021_05_23_213622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "kata", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "codewars_id"
+    t.string "language"
+    t.string "level"
+    t.string "title"
+    t.text "instructions"
+    t.datetime "completed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_kata_on_user_id"
+  end
+
+  create_table "solutions", force: :cascade do |t|
+    t.text "content"
+    t.bigint "kata_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["kata_id"], name: "index_solutions_on_kata_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +44,12 @@ ActiveRecord::Schema.define(version: 2021_05_23_203722) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "codewars_api_token"
+    t.string "codewars_nickname"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "kata", "users"
+  add_foreign_key "solutions", "kata", column: "kata_id"
 end
