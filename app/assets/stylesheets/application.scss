@@ -46,3 +46,13 @@ html {
   width: 80vw;
   margin: 0 auto;
 }
+
+.rails-flashes {
+  background: rgba(34, 156, 200, 1);
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  position: fixed;
+  top: 0;
+  margin: 20px;
+  z-index: 9999999;
+}

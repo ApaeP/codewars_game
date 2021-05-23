@@ -12,15 +12,19 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+
     <div class="main-container">
       <div class="main-container-content">
         <%= yield %>
       </div>
     </div>
+
+    <% flash.each do |type, msg| %>
+      <div class="rails-flashes alert alert-<%= type == 'notice' ? 'success' : 'warning' %>">
+        <%= msg %>
+      </div>
+    <% end %>
+
     <%= render 'shared/footer' %>
   </body>
 </html>

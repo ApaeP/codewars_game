@@ -11,3 +11,13 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("jquery")
+
+$(document).on('turbolinks:load', function() {
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('.alert').fadeOut();
+    }, 2000);
+  })
+})
