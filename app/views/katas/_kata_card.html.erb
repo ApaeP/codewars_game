@@ -1,0 +1,30 @@
+<div class="kata-card" style="background: <%= kata.color %>;">
+  <div class="kata-card-infos">
+    <%= kata.level_text %> | <%= kata.title %> - <em><%= kata.solutions.count %> solutions</em>
+
+  </div>
+  <div class="kata-card-ctas">
+    <%= link_to "build", build_kata_path(kata), method: :patch unless kata.built %>
+  </div>
+</div>
+
+<style>
+  .kata-card {
+    width: 250px;
+    /*height: 40px;*/
+    border: 1px solid rgba(200, 45, 89, 0.2);
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 0.1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .kata-card-infos {
+    /*height: 70%;*/
+  }
+
+  .kata-card-ctas {
+    /*height: 30%;*/
+  }
+</style>

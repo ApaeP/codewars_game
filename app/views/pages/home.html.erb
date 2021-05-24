@@ -1,21 +1,25 @@
-<h1 style="margin: 0;">Pages#home</h1>
 <div class="container">
   <% if user_signed_in? %>
-    katas completés : <%= current_user.katas.count %>
+    <h1 style="margin: 0;">Codewars ninja : <%= current_user.codewars_nickname %></h1>
+    <h2>katas completés : <%= current_user.katas.count %></h2>
     <br>
     <br>
     <br>
     <br>
-    katas :
-    <ol style="line-height: 0.2rem;">
-      <% current_user.katas.each do |kata| %>
-        <li>
-          <p>
-            <%= kata.title %> <%= link_to "build", build_kata_path(kata), method: :patch %> - <em><%= kata.solutions.count %> solutions</em>
-          </p>
-        </li>
+    <div class="katas-container">
+      <% @katas.each do |kata| %>
+        <%= render 'katas/kata_card', kata: kata %>
       <% end %>
+    </div>
     </ol>
   <% end %>
 
 </div>
+
+<style>
+  .katas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

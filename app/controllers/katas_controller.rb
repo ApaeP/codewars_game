@@ -15,7 +15,11 @@ class KatasController < ApplicationController
 
   def build_katas
     flash[:notice] = "build katas"
+    current_user.katas.each do |e|
+      next if e.built?
 
+      KataBuilderWorker.perform_now(e)
+    end
     redirect_to root_path
   end
 end

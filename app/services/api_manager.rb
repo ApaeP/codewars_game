@@ -1,8 +1,4 @@
 class ApiManager
-  # require 'json'
-  # require 'net/http'
-  # require 'uri'
-  # include ViewHelper
 
   def initialize(**attributes)
     @token = attributes[:api_token]
@@ -19,6 +15,16 @@ class ApiManager
 
     @data.flatten
   end
+
+  def fetch_challenge_infos(url)
+    request = Net::HTTP::Get.new(url)
+    response = Net::HTTP.start(@base_uri.hostname, @base_uri.port, @request_options) do |http|
+      http.request(request)
+    end
+    JSON.parse(response.body)
+  end
+
+  private
 
   def fetch_page(page)
     request = Net::HTTP::Get.new("#{@base_uri}#{page}")
