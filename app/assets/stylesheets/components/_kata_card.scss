@@ -1,8 +1,9 @@
 .kata-card-link-wrapper {
   color: rgba(20, 20, 20, 1);
   transition: all ease 0.1s;
+  text-decoration: none;
   &:hover {
-    scale: 1.05;
+    scale: 1.02;
     color: rgba(50, 50, 50, 1);
   }
 }

@@ -1,17 +1,20 @@
 <div class="container">
   <% if user_signed_in? %>
-    <h1 style="margin: 0;">Codewars ninja : <%= current_user.codewars_nickname %></h1>
-    <h2>katas completés : <%= current_user.katas.count %></h2>
     <br>
+    <h1 style="margin: 0;">Codewars user - <%= current_user.codewars_nickname %></h1>
+    <h4>katas completés : <%= current_user.katas.count %></h4>
     <br>
+
     <br>
+    <%= will_paginate @katas %>
     <br>
     <div class="katas-container">
       <% @katas.each do |kata| %>
         <%= render 'katas/kata_card', kata: kata %>
       <% end %>
     </div>
-    </ol>
+    <br>
+    <br>
   <% end %>
 
 </div>
