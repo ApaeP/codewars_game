@@ -1,29 +1,36 @@
+# == Schema Information
+#
+# Table name: kata
+#
+#  id              :bigint           not null, primary key
+#  codewars_id     :string
+#  url             :string
+#  title           :string
+#  rank            :jsonb
+#  tags            :text             default([]), is an Array
+#  category        :string
+#  creation_date   :datetime
+#  languages       :text             default([]), is an Array
+#  vote_score      :integer
+#  total_stars     :integer
+#  description     :text
+#  total_attempts  :integer
+#  total_completed :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class Kata < ApplicationRecord
-  belongs_to :user
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
 
   validates :codewars_id, presence: true, uniqueness: true
 
-  def level_text
-    return 'none' unless challenge_infos
-
-    challenge_infos['rank']['name']
-  end
-
-  def level_int
-    return 0 unless challenge_infos
-
-    challenge_infos['rank']['id']
-  end
-
   def color
-    return unless challenge_infos
-    return '#df928e' unless challenge_infos['rank']['color']
+    return '#df928e' unless rank['color']
 
     { 'white' => '#e6e6e6',
       'yellow' => '#ecb613',
       'blue' => '#3c7ebb',
       'purple' => '#866cc7'
-    }[challenge_infos['rank']['color']]
+    }[rank['color']]
   end
 end

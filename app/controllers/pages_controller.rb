@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     if current_user
-      @katas = current_user.katas.sort_by { |k| k.level_int.nil? ? -10 : k.level_int }.reverse
+      @katas = current_user.katas#.sort_by { |k| k.level_int.nil? ? -10 : k.level_int }.reverse
     end
   end
 

@@ -1,25 +1,23 @@
 class KatasController < ApplicationController
 
-  def fetch_katas
-    ApiFetcherWorker.perform_now current_user
-    redirect_to root_path
-  end
-
-  def build_kata
+  def show
     @kata = Kata.find(params[:id])
-    KataBuilderWorker.perform_now(@kata)
-    flash[:notice] = "build kata #{@kata.title}"
+  end
 
+  def fetch_katas
+    ApiFetcherWorker.perform_now(current_user)
+    build_katas
     redirect_to root_path
   end
+
+  private
 
   def build_katas
     flash[:notice] = "build katas"
-    current_user.katas.each do |e|
-      next if e.built?
+    Kata.all.each do |e|
+      next if e.title.present?
 
       KataBuilderWorker.perform_now(e)
     end
-    redirect_to root_path
   end
 end

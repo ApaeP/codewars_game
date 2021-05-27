@@ -10,6 +10,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
+gem 'pry'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -22,6 +23,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
+  gem 'annotate'
 end
 
 group :test do
@@ -34,3 +36,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sidekiq'
 gem 'devise'
+gem 'watir'
