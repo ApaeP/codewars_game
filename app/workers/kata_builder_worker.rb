@@ -4,11 +4,16 @@ class KataBuilderWorker < ActiveJob::Base
   def perform(kata)
     challenge_infos_url = "https://www.codewars.com/api/v1/code-challenges/#{kata.codewars_id}"
     data = ApiManager.new.fetch_challenge_infos(challenge_infos_url)
-
-    if kata.update(challenge_infos: data)
-      kata.update(built: true)
+    data.keys.each { |key| data[key.underscore.to_sym] = data.delete(key) }
+    data[:codewars_id] = data.delete(:id)
+    data[:rank].keys.each { |key| data[:rank][key.underscore.to_sym] = data[:rank].delete(key) }
+    data[:title] = data.delete(:name)
+    data[:created_at] = DateTime.parse(data[:created_at])
+    data[:creation_date] = data.delete(:created_at)
+    %i(slug published_at approved_at created_by approved_by contributors_wanted unresolved).each do |key|
+      data.delete(key)
     end
-    # url = "https://www.codewars.com/kata/#{kata.codewars_id}/train/#{kata.language}"
-    # puts "\n\n\n#{data}\n\n\n"
+
+    kata.update(data)
   end
 end

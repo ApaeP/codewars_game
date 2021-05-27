@@ -1,0 +1,18 @@
+<h1 class="kata-title"><%= @kata.title %></h1>
+<% @kata.class.column_names.each do |col| %>
+  <% if col == 'description' %>
+    <p class="kata-value"><%= col %> - <%= @kata.send(col.to_sym).html_safe %></p>
+  <% else %>
+    <p class="kata-value"><%= col %> - <%= @kata.send(col.to_sym) %></p>
+  <% end -%>
+  <hr>
+<% end %>
+
+
+
+<style type="text/css">
+  .kata-title {
+    text-align: center;
+  }
+</style>
+

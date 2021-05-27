@@ -10,32 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_083631) do
+ActiveRecord::Schema.define(version: 2021_05_24_221259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "kata", force: :cascade do |t|
+  create_table "friendships", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "codewars_id"
-    t.string "language"
-    t.string "level"
-    t.string "title"
-    t.text "instructions"
-    t.datetime "completed_at"
+    t.integer "friend_id"
+    t.boolean "confirmed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "built", default: false
-    t.jsonb "challenge_infos"
-    t.index ["user_id"], name: "index_kata_on_user_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "kata", force: :cascade do |t|
+    t.string "codewars_id"
+    t.string "url"
+    t.string "title"
+    t.jsonb "rank", default: {}
+    t.text "tags", default: [], array: true
+    t.string "category"
+    t.datetime "creation_date"
+    t.text "languages", default: [], array: true
+    t.integer "vote_score"
+    t.integer "total_stars"
+    t.text "description"
+    t.integer "total_attempts"
+    t.integer "total_completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "solutions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "kata_id", null: false
     t.text "content"
+    t.text "languages", default: [], array: true
+    t.datetime "completed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "kata_id", null: false
     t.index ["kata_id"], name: "index_solutions_on_kata_id"
+    t.index ["user_id"], name: "index_solutions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_083631) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "kata", "users"
+  add_foreign_key "friendships", "users"
   add_foreign_key "solutions", "kata", column: "kata_id"
+  add_foreign_key "solutions", "users"
 end
