@@ -6,7 +6,7 @@
     <br>
 
     <br>
-    <%= will_paginate @katas %>
+    <%= will_paginate @katas unless @katas.empty? %>
     <br>
     <div class="katas-container">
       <% @katas.each do |kata| %>
@@ -14,6 +14,7 @@
       <% end %>
     </div>
     <br>
+    <%= will_paginate @katas unless @katas.empty? %>
     <br>
   <% end %>
 

@@ -36,4 +36,8 @@ class User < ApplicationRecord
   def request_friendship(user)
     friendships.create(friend_id: user.id)
   end
+
+  def has_solution_for_this_kata?(kata)
+    solutions.any? { |sol| sol.kata.id = kata.id }
+  end
 end

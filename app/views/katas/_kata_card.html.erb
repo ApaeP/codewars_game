@@ -1,10 +1,22 @@
-<%= link_to kata_path(kata), class: "kata-card-link-wrapper" do %>
-  <div class="kata-card" style="background: <%= kata&.color %>">
-    <div class="kata-card-infos">
-      <%= kata&.rank["name"] %> | <%= kata&.title %> - <em><%= kata&.solutions.count %> solutions</em>
+<div class="courses-container kata-color-<%= kata&.level_color %>">
+  <div class="kata-card">
+    <div class="kata-card-level">
+      <h6>Level</h6>
+      <h2><%= kata.level_name || "None" %></h2>
+      <a href="#">View all chapters <i class="fas fa-chevron-right"></i></a>
     </div>
-    <div class="kata-card-ctas">
+    <div class="kata-card-info">
+      <div class="kata-card-progress-container <%= (x = current_user.has_solution_for_this_kata?(kata)) ? "solved" : "unsolved" %>">
+        <div class="kata-card-progress"></div>
+        <span class="kata-card-progress-text">
+          <%= x ? "solved" : "unsolved" %>
+        </span>
+      </div>
+      <h6>Kata</h6>
+      <h2><%= kata&.title %></h2>
+      <%= link_to kata_path(kata) do %>
+        <button class="kata-card-btn">View</button>
+      <% end %>
     </div>
   </div>
-<% end %>
-
+</div>

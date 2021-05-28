@@ -4,7 +4,9 @@ class CreateKata < ActiveRecord::Migration[6.1]
       t.string :codewars_id
       t.string :url
       t.string :title
-      t.jsonb :rank, default: {}
+      t.integer :level
+      t.string :level_name
+      t.string :level_color
       t.text :tags, array: true, default: []
       t.string :category
       t.datetime :creation_date

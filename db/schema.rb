@@ -28,7 +28,9 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
     t.string "codewars_id"
     t.string "url"
     t.string "title"
-    t.jsonb "rank", default: {}
+    t.integer "level"
+    t.string "level_name"
+    t.string "level_color"
     t.text "tags", default: [], array: true
     t.string "category"
     t.datetime "creation_date"
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
     t.bigint "kata_id", null: false
     t.text "content"
     t.text "languages", default: [], array: true
+    t.string "codewars_id"
     t.datetime "completed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -6,7 +6,9 @@
 #  codewars_id     :string
 #  url             :string
 #  title           :string
-#  rank            :jsonb
+#  level           :integer
+#  level_name      :string
+#  level_color     :string
 #  tags            :text             default([]), is an Array
 #  category        :string
 #  creation_date   :datetime
@@ -24,13 +26,54 @@ class Kata < ApplicationRecord
 
   validates :codewars_id, presence: true, uniqueness: true
 
-  def color
-    return '#df928e' unless rank['color']
+  def code_description
+    pre = ["<pre><code>", "</code></pre>"].cycle
+    code = ["<code>", "</code>"].cycle
+    arr = description.split("```")
 
-    { 'white' => '#e6e6e6',
-      'yellow' => '#ecb613',
-      'blue' => '#3c7ebb',
-      'purple' => '#866cc7'
-    }[rank['color']]
+    # previous_was_pre = false
+    # (arr.count - 1).times do |i|
+    #   if (arr[i + 1].match?(/\n/) && !previous_was_pre)
+    #     arr[i] << pre.next
+    #     previous_was_pre = true
+    #   elsif previous_was_pre
+    #     arr[i] << pre.next
+    #     previous_was_pre = false
+    #   else
+    #     arr[i] << code.next
+    #     previous_was_pre = false
+    #   end
+    # end
+    arr.join.gsub(/\n/, '<br>').html_safe
   end
+
+  # def color # dark
+  #   return 'hsl(3, 56%, 60%)' unless level_color
+
+  #   { 'white' => 'hsl(0, 0%, 78%)',
+  #     'yellow' => 'hsl(45, 85%, 38%)',
+  #     'blue' => 'hsl(209, 51%, 36%)',
+  #     'purple' => 'hsl(257, 45%, 48%)'
+  #   }[level_color]
+  # end
+
+  # def color # codewars hsl
+  #   return 'hsl(3, 56%, 72%)' unless level_color
+
+  #   { 'white' => 'hsl(0, 0%, 90%)',
+  #     'yellow' => 'hsl(45, 85%, 50%)',
+  #     'blue' => 'hsl(209, 51%, 48%)',
+  #     'purple' => 'hsl(257, 45%, 60%)'
+  #   }[level_color]
+  # end
+
+  # def color # codewars
+  #   return '#df928e' unless level_color
+
+  #   { 'white' => '#e6e6e6',
+  #     'yellow' => '#ecb613',
+  #     'blue' => '#3c7ebb',
+  #     'purple' => '#866cc7'
+  #   }[level_color]
+  # end
 end

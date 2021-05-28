@@ -6,7 +6,9 @@
 #  codewars_id     :string
 #  url             :string
 #  title           :string
-#  rank            :jsonb
+#  level           :integer
+#  level_name      :string
+#  level_color     :string
 #  tags            :text             default([]), is an Array
 #  category        :string
 #  creation_date   :datetime

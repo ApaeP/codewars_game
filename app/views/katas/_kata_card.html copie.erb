@@ -1,0 +1,13 @@
+<%= link_to kata_path(kata), class: "kata-card-link-wrapper" do %>
+  <div class="kata-card" style="background: <%= kata&.color %>">
+    <div class="kata-card-level">
+      <%= kata&.level_name %>
+    </div>
+    <div class="kata-card-infos">
+      <%= kata&.title %>
+    </div>
+    <div class="kata-card-ctas">
+    </div>
+  </div>
+<% end %>
+
