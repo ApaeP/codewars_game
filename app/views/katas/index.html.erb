@@ -4,10 +4,6 @@
     <%= submit_tag "Search", :name => nil %>
   <% end %>
   <% if user_signed_in? %>
-    <br>
-    <h1 style="margin: 0;">Codewars user - <%= current_user.codewars_nickname %></h1>
-    <h4>katas completés : <%= current_user.katas.count %></h4>
-    <br>
 
     <br>
     <%= will_paginate @katas unless @katas.empty? %>
