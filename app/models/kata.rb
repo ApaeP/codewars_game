@@ -24,6 +24,9 @@
 class Kata < ApplicationRecord
   has_many :solutions, dependent: :destroy
 
+  scope :invalid, -> {where(level: nil)}
+  scope :valid,   -> {where.not(level: nil)}
+
   validates :codewars_id, presence: true, uniqueness: true
 
   def code_description
