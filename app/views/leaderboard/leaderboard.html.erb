@@ -1,4 +1,11 @@
-Leaderboard
+<h1>Leaderboard</h1>
+<%= form_tag(leaderboard_path, :method => "get") do %>
+  <%= submit_tag "Sort by", :name => nil %>
+  <%= label :sort, 'Ranks', :value => 'ranks' %>
+  <%= radio_button_tag(:sort, "ranks", checked = params[:sort] == "ranks") %>
+  <%= label :sort, 'Katas solved', :value => 'katas' %>
+  <%= radio_button_tag(:sort, "katas", checked = params[:sort] == "katas") %>
+<% end %>
 <div class="leaderboard">
   <% @users.each do |user| %>
     <%= render 'user_infos/user_card', user: user %>

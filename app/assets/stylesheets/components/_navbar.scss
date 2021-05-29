@@ -5,7 +5,6 @@
   top: 0;
   width: 100vw;
   height: $navbar-height;
-  border-radius: 0 0 10px 10px;
   z-index: 99999;
 }
 
@@ -15,7 +14,7 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  border-radius: 0 0 0 10px;
+  border-radius: 0 0 10px 0;
 }
 
 .navbar-content {
@@ -37,11 +36,28 @@
   }
 }
 
+.navbar-user-infos::after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  display: block;
+  border-radius: 0 0 0 10px;
+  transition: all ease 0.2s;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.navbar-user-infos:hover::after {
+  opacity: 1;
+}
+
 .navbar-user-infos {
   min-width: 100px;
-  background-color: bisque;
   width: 10vw;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 0 10px;
+  text-decoration: none;
   h2 {
     color: white;
     font-weight: 800;
@@ -53,5 +69,25 @@
     font-weight: 100;
     text-align: center;
     margin: 5% auto;
+  }
+
+  &.user-color-white {
+    background-color: hsl(0, 0%, 90%);
+  }
+
+  &.user-color-yellow {
+    background-color: hsl(45, 85%, 50%);
+  }
+
+  &.user-color-blue {
+    background-color: hsl(209, 51%, 48%);
+  }
+
+  &.user-color-purple {
+    background-color: hsl(257, 45%, 60%);
+  }
+
+  &.user-color- {
+    background-color: hsl(3, 56%, 70%);
   }
 }

@@ -1,23 +1,12 @@
 <div class="user-color-<%= user&.overall_rank_color %>">
   <div class="user-card">
     <div class="user-card-level">
-      <!-- <h6>Level</h6> -->
       <h2><%= user.overall_rank_name || "No rank" %></h2>
-      <!-- <a href="#">View all chapters <i class="fas fa-chevron-right"></i></a> -->
     </div>
     <div class="user-card-info">
-      <!-- <div class="user-card-progress-container"> -->
-<!--         <div class="user-card-progress"></div>
-        <span class="user-card-progress-text">
-        </span> -->
-      <!-- </div> -->
-      <!-- <h6>user</h6> -->
       <h2><%= user&.full_name %></h2>
       <h6><%= user&.katas_completed_count %> katas completed</h6>
       <h6>Favorite language is <%= user&.preferred_language %></h6>
-      <%#= link_to user_path(user) do %>
-        <!-- <button class="user-card-btn">View</button> -->
-      <%# end %>
     </div>
   </div>
 </div>

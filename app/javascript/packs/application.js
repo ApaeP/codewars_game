@@ -14,12 +14,15 @@ ActiveStorage.start()
 
 require("jquery")
 
+import { sizeUserCardElems } from '../components/card_user_elem_width.js'
+
 $(document).on('turbolinks:load', function() {
   $(document).ready(function(){
     setTimeout(function(){
       $('.alert').fadeOut();
     }, 2500);
   })
+  sizeUserCardElems();
 })
 
 import "controllers"

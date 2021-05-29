@@ -6,15 +6,10 @@ class KatasController < ApplicationController
 
   def index
     if params[:query]
-      @katas = Kata.where(id: 20)
+      @katas = Kata.where(id: 20).paginate(page: params[:page], per_page: 50)
     else
-      @katas = Kata.all#.sort_by { |k| k.level.nil? ? -10 : k.level }.reverse
+      @katas = Kata.valid.order({level: :desc}).paginate(page: params[:page], per_page: 50)
     end
-    @katas = @katas.paginate(page: params[:page], per_page: 50)
-    #Antique.where(category_id: params[:category]).order("created_at DESC").paginate(page: params[:page], per_page: per_page)
-    #Kata.where().paginate(:page => params[:page]).order('id DESC')
-    #@katas = current_user.katas#.sort_by { |k| k.level_int.nil? ? -10 : k.level_int }.reverse
-    # @katas = current_user.katas.order(:level).reverse_order.paginate(page: params[:page], per_page: 50)#.sort_by { |k| k.level.nil? ? -10 : k.level }.reverse
   end
 
   def fetch_katas
