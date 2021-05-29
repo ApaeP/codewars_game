@@ -1,0 +1,6 @@
+Leaderboard
+<div class="leaderboard">
+  <% @users.each do |user| %>
+    <%= render 'user_infos/user_card', user: user %>
+  <% end %>
+</div>

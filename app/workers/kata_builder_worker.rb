@@ -5,6 +5,7 @@ class KataBuilderWorker < ActiveJob::Base
     challenge_infos_url = "https://www.codewars.com/api/v1/code-challenges/#{kata.codewars_id}"
     data = ApiManager.new.fetch_challenge_infos(challenge_infos_url)
     data.keys.each { |key| data[key.underscore.to_sym] = data.delete(key) }
+    return if data[:success] == false
     data[:codewars_id] = data.delete(:id)
     # data[:rank].keys.each { |key| data[:rank][key.underscore.to_sym] = data[:rank].delete(key) }
 

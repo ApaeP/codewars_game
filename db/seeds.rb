@@ -8,5 +8,23 @@ User.destroy_all
 puts "Records destroyed"
 
 puts "\nCreate records"
-User.create!(email: 'test@test.com', password: 'azerty', codewars_nickname: 'ApaeP', codewars_api_token: 'pCaCQfbn9zyRkY6ymEWe')
+
+puts "\nCreate users"
+User.create!(
+  email: 'test@test.com',
+  password: 'azerty',
+  codewars_nickname: 'ApaeP',
+  codewars_api_token: 'pCaCQfbn9zyRkY6ymEWe')
+User.create!(
+  email: "test1@test1.com",
+  password: 'azerty',
+  codewars_api_token: 'PCaCQfbn9zyRkY6ymEWe',
+  codewars_nickname: "Wulfens",
+)
+User.create!(
+  email: "test2@test2.com",
+  password: 'azerty',
+  codewars_api_token: 'zCaCQfbn9zyRkY6ymEWe',
+  codewars_nickname: "Lomig",
+)
 puts "Records created"

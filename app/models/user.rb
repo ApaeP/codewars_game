@@ -65,6 +65,11 @@ class User < ApplicationRecord
   end
 
   def full_name
+    return "noname" unless first_name
     first_name + ' ' + last_name
+  end
+
+  def preferred_language
+    language_ranks.to_a.sort_by { |k| k.last["score"] }.last[0].capitalize
   end
 end

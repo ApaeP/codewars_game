@@ -1,0 +1,147 @@
+
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.user-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  max-width: 100%;
+  margin: 5px;
+  overflow: hidden;
+  width: 80vw;
+}
+
+.user-card h6 {
+  opacity: 0.6;
+  margin: auto 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.user-card h2 {
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+
+.user-card-level {
+  color: #fff;
+  padding: 20px 30px;
+  max-width: 250px;
+  min-width: 130px;
+}
+
+.user-card-level a {
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.user-card-info {
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-card-progress-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  text-align: right;
+  width: 150px;
+}
+
+.user-card-progress-container.solved {
+  .user-card-progress::after {
+    width: 100%;
+  }
+}
+
+.user-card-progress-container.unsolved {
+  .user-card-progress::after {
+    width: 0%;
+  }
+}
+
+.user-card-progress {
+  background-color: #ddd;
+  border-radius: 3px;
+  height: 5px;
+  width: 100%;
+}
+
+.user-card-progress::after {
+  border-radius: 3px;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+}
+
+.user-card-progress-text {
+  font-size: 10px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.user-card-btn {
+  border: 0;
+  border-radius: 50px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 25px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  &:hover {
+    scale: 1.02;
+  }
+}
+
+.user-color-white {
+     .user-card-btn, .user-card-level, .user-card-btn, .user-card-progress::after {
+      background-color: hsl(0, 0%, 90%);
+  }
+}
+
+
+.user-color-yellow {
+     .user-card-btn, .user-card-level, .user-card-btn, .user-card-progress::after {
+      background-color: hsl(45, 85%, 50%);
+  }
+}
+
+
+.user-color-blue {
+     .user-card-btn, .user-card-level, .user-card-btn, .user-card-progress::after {
+      background-color: hsl(209, 51%, 48%);
+  }
+}
+
+
+.user-color-purple {
+     .user-card-btn, .user-card-level, .user-card-btn, .user-card-progress::after {
+      background-color: hsl(257, 45%, 60%);
+  }
+}
+
+
+.user-color- {
+     .user-card-btn, .user-card-level, .user-card-btn, .user-card-progress::after {
+      background-color: hsl(3, 56%, 70%);
+  }
+}
