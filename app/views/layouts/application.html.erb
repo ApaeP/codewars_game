@@ -21,12 +21,12 @@
       </div>
     </div>
 
-    <% flash.each do |type, msg| %>
-      <!-- <div class="rails-flashes alert alert-<%#= type == 'notice' ? 'success' : 'warning' %>"> -->
-        <%= msg %>
-      <!-- </div> -->
-    <% end %>
 
+    <% flash.each do |type, msg| %>
+      <div class="rails-flashes alert alert-<%= type %>">
+        <%= msg %>
+      </div>
+    <% end %>
     <%= render 'shared/footer' %>
   </body>
 </html>

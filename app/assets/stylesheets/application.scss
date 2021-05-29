@@ -28,7 +28,6 @@ body {
   background-color: hsla(220, 3%, 19%, 1);
 }
 
-
 html::-webkit-scrollbar {
   display: none;
 }
@@ -40,7 +39,7 @@ html {
 }
 
 .main-container {
-  min-height: calc(100vh - #{$navbar_height} - #{$footer-height});
+  min-height: calc(100vh - (#{$navbar_height} + #{$footer-height}));
   margin: 0 auto;
 }
 
@@ -50,13 +49,23 @@ html {
 }
 
 .rails-flashes {
-  background: rgba(34, 156, 200, 1);
-  padding: 1rem 2rem;
-  border-radius: 3px;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: center;
+  color: white;
+  border-radius: 0 0 5px 5px;
   position: fixed;
-  top: 0;
-  margin: 20px;
+  top: $navbar_height;
   z-index: 9999999;
+  &.alert-notice {
+    background: rgba(34, 156, 200, 1);
+  }
+  &.alert-success {
+    background: rgba(54, 190, 140, 1);
+  }
+  &.alert-warning {
+    background: rgba(190, 86, 60, 1);
+  }
 }
 
 .pagination {

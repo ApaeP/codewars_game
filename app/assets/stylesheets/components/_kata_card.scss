@@ -56,22 +56,17 @@
   width: 150px;
 }
 
-
-
 .kata-card-progress-container.solved {
   .kata-card-progress::after {
     width: 100%;
   }
 }
 
-
 .kata-card-progress-container.unsolved {
   .kata-card-progress::after {
     width: 0%;
   }
 }
-
-
 
 .kata-card-progress {
   background-color: #ddd;
@@ -146,39 +141,3 @@
       background-color: hsl(3, 56%, 70%);
   }
 }
-
-// .kata-card-link-wrapper {
-//   color: rgba(20, 20, 20, 1);
-//   transition: all ease 0.1s;
-//   text-decoration: none;
-//   &:hover {
-//     scale: 1.02;
-//     color: rgba(50, 50, 50, 1);
-//   }
-// }
-
-// .kata-card {
-//   width: 20rem;
-//   height: 5rem;
-//   border: 1px solid rgba(200, 45, 89, 0.2);
-//   border-radius: 3px;
-//   padding: 0.6rem;
-//   margin: 0.15rem;
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-// }
-
-// .kata-card-level {
-//   height: 1rem;
-//   display: flex;
-//   justify-content: end;
-// }
-
-// .kata-card-infos {
-//   text-align: center;
-//   margin: 1rem 0 0 0;
-// }
-
-// .kata-card-ctas {
-//   /*height: 30%;*/
-// }
