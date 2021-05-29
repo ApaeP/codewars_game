@@ -12,6 +12,18 @@
 #  updated_at             :datetime         not null
 #  codewars_api_token     :string
 #  codewars_nickname      :string
+#  honor                  :integer
+#  clan                   :string
+#  leaderboard_position   :integer
+#  first_name             :string
+#  last_name              :string
+#  overall_rank           :integer
+#  overall_rank_name      :string
+#  overall_rank_color     :string
+#  overall_score          :integer
+#  language_ranks         :jsonb
+#  katas_authored_count   :integer
+#  katas_completed_count  :integer
 #
 
 # This model initially had no columns defined. If you add columns to the
