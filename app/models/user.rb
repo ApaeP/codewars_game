@@ -23,6 +23,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :codewars_api_token, presence: true, format: { with: /\A\w{20}\z/, message: "only allows letters" }
+  validates :codewars_nickname, presence: true
+
+  after_create :fetch_and_update_infos
+
   def friends
     friends_i_invited = Friendship.where(user: id, confirmed: true).pluck(:friend_id)
     friends_requests = Friendship.where(friend_id: id, confirmed: true).pluck(:user_id)
@@ -39,5 +44,9 @@ class User < ApplicationRecord
 
   def has_solution_for_this_kata?(kata)
     solutions.any? { |sol| sol.kata.id = kata.id }
+  end
+
+  def fetch_and_update_infos
+    update(UserInfoApi.new(self).user_infos)
   end
 end

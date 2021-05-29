@@ -3,7 +3,8 @@
     <div class="navbar-content">
       <%= link_to "Home", root_path %>
       <%= link_to "Fetch katas", fetch_katas_path if user_signed_in? %>
-      <%= link_to "Build katas", build_katas_path, method: :patch if user_signed_in? %>
+      <%= link_to "Katas", katas_path if user_signed_in? %>
+      <%= link_to "Update", api_update_user_path(current_user), method: :patch if user_signed_in? %>
       <%= link_to "Connection", new_user_session_path unless user_signed_in? %>
     </div>
   </div>
