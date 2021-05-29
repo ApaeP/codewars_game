@@ -15,9 +15,14 @@ class UserInfoApi
 
   def user_infos
     data = fetch_user_infos
+    return unless data
     data.keys.each { |key| data[key.underscore.to_sym] = data.delete(key) }
-    data[:first_name] = data[:name].split.first
-    data[:last_name] = data.delete(:name).split.last
+    if data[:name]
+      data[:first_name] = data[:name].split.first
+      data[:last_name] = data.delete(:name).split.last
+    else
+      data.delete(:name)
+    end
     data.delete(:username)
     data.delete(:skills)
     data[:overall_rank] = data[:ranks]["overall"]["rank"]
