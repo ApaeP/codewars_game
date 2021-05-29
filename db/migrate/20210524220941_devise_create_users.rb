@@ -34,8 +34,21 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.timestamps null: false
 
-      t.string :codewars_api_token
-      t.string :codewars_nickname
+      t.string    :codewars_api_token
+      t.string    :codewars_nickname
+
+      t.integer   :honor
+      t.string    :clan
+      t.integer   :leaderboard_position
+      t.string    :first_name
+      t.string    :last_name
+      t.integer   :overall_rank
+      t.string    :overall_rank_name
+      t.string    :overall_rank_color
+      t.integer   :overall_score
+      t.jsonb     :language_ranks
+      t.integer   :katas_authored_count
+      t.integer   :katas_completed_count
     end
 
     add_index :users, :email,                unique: true

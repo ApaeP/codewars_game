@@ -2,7 +2,8 @@ class ApiManager
 
   def initialize(**attributes)
     @token = attributes[:api_token]
-    @base_uri = URI.parse("https://www.codewars.com/api/v1/users/#{attributes[:nickname]}/code-challenges/completed?page=")
+    @nickname = attributes[:nickname]
+    @base_uri = URI.parse("https://www.codewars.com/api/v1/users/#{@nickname}/code-challenges/completed?page=")
     @request_options = { use_ssl: @base_uri.scheme == "https" }
     @data = []
   end

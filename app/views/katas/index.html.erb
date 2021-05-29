@@ -1,0 +1,30 @@
+
+<div class="container">
+  <%= form_tag(katas_path, :method => "get") do %>
+    <%= text_field_tag :query, params[:query], placeholder: "Search katas" %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+  <% if user_signed_in? %>
+
+    <br>
+    <%= will_paginate @katas unless @katas.empty? %>
+    <br>
+    <div class="katas-container">
+      <% @katas.each do |kata| %>
+        <%= render 'katas/kata_card', kata: kata %>
+      <% end %>
+    </div>
+    <br>
+    <%= will_paginate @katas unless @katas.empty? %>
+    <br>
+  <% end %>
+
+</div>
+
+<style>
+  .katas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>
