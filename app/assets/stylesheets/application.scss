@@ -25,6 +25,7 @@
 body {
   font-family: 'Muli', sans-serif;
   margin: 0;
+  background-color: hsla(220, 3%, 19%, 1);
 }
 
 
@@ -41,7 +42,6 @@ html {
 .main-container {
   min-height: calc(100vh - #{$navbar_height} - #{$footer-height});
   margin: 0 auto;
-  background-color: hsla(220, 3%, 19%, 1);
 }
 
 .main-container-content {
