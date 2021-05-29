@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   patch 'katas/build_kata/:id', to: 'katas#build_kata', as: :build_kata
   patch 'katas/build_katas', to: 'katas#build_katas', as: :build_katas
 
-  resources :katas, only: :show
+  resources :katas, only: [:show, :index]
 end

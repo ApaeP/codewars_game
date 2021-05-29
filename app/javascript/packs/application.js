@@ -21,3 +21,5 @@ $(document).on('turbolinks:load', function() {
     }, 2000);
   })
 })
+
+import "controllers"
