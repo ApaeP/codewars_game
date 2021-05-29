@@ -14,8 +14,8 @@
           <div class="job">Codewars <%= level_category(current_user.honor) %></div>
 
           <div class="actions">
-            <button class="profile-btn">Follow</button>
-            <button class="profile-btn">Message</button>
+            <%= link_to "Update profile", api_update_user_path(current_user), class: 'profile-btn', method: :patch if user_signed_in? %>
+            <%= link_to "Fetch new katas", fetch_katas_path, class: 'profile-btn' if user_signed_in? %>
           </div>
         </div>
 
