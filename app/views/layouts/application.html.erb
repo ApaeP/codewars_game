@@ -22,9 +22,9 @@
     </div>
 
     <% flash.each do |type, msg| %>
-      <div class="rails-flashes alert alert-<%= type == 'notice' ? 'success' : 'warning' %>">
+      <!-- <div class="rails-flashes alert alert-<%#= type == 'notice' ? 'success' : 'warning' %>"> -->
         <%= msg %>
-      </div>
+      <!-- </div> -->
     <% end %>
 
     <%= render 'shared/footer' %>
