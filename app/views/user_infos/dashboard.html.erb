@@ -1,0 +1,107 @@
+<div class="dashboard">
+  <h1>dashboard</h1>
+
+  <div class="user-infos">
+
+
+
+      <div class="center">
+
+        <div class="profile">
+          <div class="image">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+            <img src="https://s.tmimgcdn.com/scr/800x500/77300/ninja-logo-template-modele-logo-77303_77303-2-original.jpg" width="70" height="70" alt="Jessica Potter">
+          </div>
+
+          <div class="name"><%= current_user.full_name %></div>
+          <div class="job">Codewars <%= level_category(current_user.honor) %></div>
+
+          <div class="actions">
+            <button class="profile-btn">Follow</button>
+            <button class="profile-btn">Message</button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="box">
+            <span class="value"><%= current_user.overall_rank_name %></span>
+            <span class="parameter">Rank</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= current_user.katas_completed_count %></span>
+            <span class="parameter">Completed Katas</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= current_user.honor %></span>
+            <span class="parameter">Honor</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= current_user.overall_score %></span>
+            <span class="parameter">Score</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= current_user.language_ranks.sort { |e| e.last["rank"] }.first.first.capitalize %></span>
+            <span class="parameter">Favorite Language</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= current_user.leaderboard_position %></span>
+            <span class="parameter">Codewars leaderboard position</span>
+          </div>
+        </div>
+      </div>
+
+
+
+
+   <!--  <%# current_user.class.column_names.each do |col| %>
+      <p class="kata-value"><%#= col %> - <%#= current_user.send(col.to_sym) %></p>
+      <hr>
+    <%# end %> -->
+  </div>
+  <div class="user-katas">
+    <% form_tag(katas_path, :method => "get") do %>
+      <%= text_field_tag :query, params[:query], placeholder: "Search katas" %>
+      <%= submit_tag "Search", :name => nil %>
+    <% end %>
+    <br>
+    <%= will_paginate @katas unless @katas.empty? %>
+    <br>
+    <div class="katas-container">
+      <% @katas.each do |kata| %>
+        <%= render 'katas/kata_card', kata: kata %>
+      <% end %>
+    </div>
+    <br>
+    <%= will_paginate @katas unless @katas.empty? %>
+    <br>
+  </div>
+</div>
+
+
+
+<style type="text/css">
+  .dashboard {
+    /*height: 84vh;*/
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+  .user-infos {
+    grid-column: 1;
+    grid-row: 2 / 5;
+  }
+
+  .katas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .user-katas {
+    grid-column: 2 / 5;
+    grid-row: 2 / 5;
+  }
+</style>

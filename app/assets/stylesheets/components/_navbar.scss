@@ -19,4 +19,38 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
+  a {
+    color: white;
+    text-decoration: none;
+    background: hsla(0, 0%, 100%, 0.2);
+    padding: 15px 30px;
+    border-radius: 7px;
+    transition: all ease 0.2s;
+    &:hover {
+      scale: 1.01;
+      background: hsla(0, 0%, 100%, 0.4);
+    }
+  }
 }
+
+
+
+.navbar-user-infos {
+  min-width: 100px;
+  background-color: bisque;
+  width: 10vw;
+  border-radius: 0 0 10px 0;
+  h2 {
+    color: white;
+    font-weight: 800;
+    margin: 5% auto;
+    text-align: center;
+  }
+  h6 {
+    color: white;
+    font-weight: 100;
+    text-align: center;
+    margin: 5% auto;
+  }
+}
+

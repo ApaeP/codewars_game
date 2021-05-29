@@ -7,6 +7,7 @@
 #  kata_id      :bigint           not null
 #  content      :text
 #  languages    :text             default([]), is an Array
+#  codewars_id  :string
 #  completed_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'pages/home'
-  get 'pages/dashboard'
+  get 'pages/dashboard', to: 'user_infos#dashboard', as: :dashboard
 
   get 'katas/fetch', to: 'katas#fetch_katas', as: :fetch_katas
   patch 'katas/build_kata/:id', to: 'katas#build_kata', as: :build_kata
