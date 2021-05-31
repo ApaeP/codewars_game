@@ -5,7 +5,7 @@ class CreateSolutions < ActiveRecord::Migration[6.1]
       t.references :kata, null: false, foreign_key: true
 
       t.text :content
-      t.text :languages, array: true, default: []
+      t.text :language
       t.string :codewars_id
       t.datetime :completed_at
 

@@ -3,11 +3,11 @@
   <div class="navbar-content-wrapper">
     <div class="navbar-content">
       <%= link_to "Home", root_path %>
-      <%= link_to "Dashboard", dashboard_path if user_signed_in? %>
       <%= link_to "Leaderboard", leaderboard_path if user_signed_in? %>
       <%= link_to "All Katas", katas_path if user_signed_in? %>
 
       <%= link_to "Connection", new_user_session_path unless user_signed_in? %>
+      <%= link_to "Déconnection", destroy_user_session_path, method: :delete if user_signed_in? %>
     </div>
   </div>
   <% if user_signed_in? %>

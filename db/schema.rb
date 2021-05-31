@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
     t.bigint "user_id", null: false
     t.bigint "kata_id", null: false
     t.text "content"
-    t.text "languages", default: [], array: true
+    t.text "language"
     t.string "codewars_id"
     t.datetime "completed_at"
     t.datetime "created_at", precision: 6, null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "codewars_api_token"
     t.string "codewars_nickname"
+    t.string "codewars_email"
+    t.string "codewars_password"
     t.integer "honor"
     t.string "clan"
     t.integer "leaderboard_position"

@@ -27,8 +27,6 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
   gem 'webdrivers'
 end
 
@@ -36,5 +34,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sidekiq'
 gem 'devise'
-gem 'watir'
+gem 'selenium-webdriver'
+gem 'capybara'
 gem 'will_paginate'
