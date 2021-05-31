@@ -1,3 +1,6 @@
+$navbar-user-infos-width: 15vw;
+$navbar-content-width: 75vw;
+
 .navbar {
   position: sticky;
   display: flex;
@@ -15,10 +18,11 @@
   justify-content: center;
   flex-grow: 1;
   border-radius: 0 0 10px 0;
+  // width: $navbar-content-width;
 }
 
 .navbar-content {
-  width: 75vw;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
@@ -39,7 +43,7 @@
 .navbar-user-infos::after {
   content: '';
   height: 100%;
-  width: 100%;
+  width: $navbar-user-infos-width;
   background: rgba(255, 255, 255, 0.1);
   display: block;
   border-radius: 0 0 0 10px;
@@ -55,7 +59,7 @@
 
 .navbar-user-infos {
   min-width: 100px;
-  width: 10vw;
+  width: $navbar-user-infos-width;
   border-radius: 0 0 0 10px;
   text-decoration: none;
   h2 {

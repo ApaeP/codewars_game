@@ -36,6 +36,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.string    :codewars_api_token
       t.string    :codewars_nickname
+      t.string    :codewars_email
+      t.string    :codewars_password
 
       t.integer   :honor
       t.string    :clan
