@@ -14,8 +14,8 @@ User.create!(
   email: 'test@test.com',
   password: 'azerty',
   codewars_nickname: 'ApaeP',
-  codewars_email: 'paulportier@gmail.com',
-  codewars_password: 'antalpol8221',
+  codewars_email: ENV['codewars_email'],
+  codewars_password: ENV['codewars_password'],
   codewars_api_token: 'lolzzzzzzzzzzzzzzzzz')
   # codewars_api_token: 'pCaCQfbn9zyRkY6ymEWe')
 User.create!(
