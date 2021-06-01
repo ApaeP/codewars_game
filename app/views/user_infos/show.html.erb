@@ -1,0 +1,4 @@
+<div style="width: 70vw; margin: 1vh auto;">
+  <%= render 'user_card', user: @user %>
+  <%= link_to "Request friendship", request_friendship_path(@user), method: :post %>
+</div>

@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  root  to: 'pages#home'
-  devise_for :users
-  get   'pages/home'
+  root                                  to: 'pages#home'
 
-  get   'pages/dashboard',            to: 'user_infos#dashboard', as: :dashboard
+  devise_for :users
 
   resources :katas, only: [:show, :index]
-  patch 'katas/fetch',                to: 'katas#fetch_katas', as: :fetch_katas
-  patch 'katas/build_kata/:id',       to: 'katas#build_kata', as: :build_kata
-  patch 'katas/build_katas',          to: 'katas#build_katas', as: :build_katas
 
-  patch 'solutions/build_solutions',  to: 'solutions#build_solutions', as: :build_solutions
+  get   'pages/dashboard',              to: 'user_infos#dashboard', as: :dashboard
 
-  get   '/leaderboard',               to: 'leaderboard#leaderboard'
+  patch 'katas/fetch',                  to: 'katas#fetch_katas', as: :fetch_katas
+  post  'request_friendship/:user_id',  to: 'friendships#request_friendship', as: :request_friendship
+  patch 'accept_friendship/:id',        to: 'friendships#accept_friendship', as: :accept_friendship
+  patch 'reject_friendship/:id',        to: 'friendships#reject_friendship', as: :reject_friendship
 
-  patch 'users/api_update/:user_id',  to: 'user_infos#update', as: :api_update_user
+  get   'leaderboard',                  to: 'leaderboard#leaderboard'
 
-  post '/lol',                        to: 'user_infos#lol'
+  patch 'users/api_update/:user_id',    to: 'user_infos#update', as: :api_update_user
+
+  get   'user_infos/:id',               to: 'user_infos#show', as: :user_infos
 end

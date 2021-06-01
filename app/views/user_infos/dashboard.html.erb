@@ -14,11 +14,29 @@
 
         <div class="actions">
           <%= link_to "Update profile", api_update_user_path(current_user), class: 'profile-btn', method: :patch if user_signed_in? %>
-          <%= link_to "Fetch new katas", fetch_katas_path, class: 'profile-btn', method: :patch if user_signed_in? %>
-          <%= link_to "Fetch solutions", build_solutions_path, class: 'profile-btn', method: :patch if user_signed_in? %>
+          <%= link_to "Fetch kata data", fetch_katas_path, class: 'profile-btn', method: :patch if user_signed_in? %>
+          <div>
+            <h6>Your friends</h6>
+            <ul>
+              <% current_user.friends.each do |e| %>
+                <li><%= e.full_name %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div>
+            <h6>Friend requests</h6>
+            <ul>
+              <% current_user.pending_friendships.each do |e| %>
+                <li>
+                  <%= e.requester.full_name %>
+                  <%= link_to accept_friendship_path(e), method: :patch do %><span>accept</span><% end %>
+                  <%= link_to reject_friendship_path(e), method: :patch do %><span>reject</span><% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
-
       <div class="stats">
         <div class="box">
           <span class="value"><%= current_user.overall_rank_name %></span>
