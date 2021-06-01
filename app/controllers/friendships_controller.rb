@@ -11,7 +11,7 @@ class FriendshipsController < ApplicationController
   def accept_friendship
     @friendship = Friendship.find(params[:id])
     if @friendship.update(status: "accepted")
-      flash[:notice] = "Accepted invitation from #{User.find(params[:id]).full_name}"
+      flash[:notice] = "Accepted invitation from #{@friendship.requester.full_name}"
     else
       flash[:warning] = "You suck"
     end
@@ -20,7 +20,7 @@ class FriendshipsController < ApplicationController
   def reject_friendship
     @friendship = Friendship.find(params[:id])
     if @friendship.update(status: "refused")
-      flash[:notice] = "Rejected invitation from #{User.find(params[:id]).full_name}"
+      flash[:notice] = "Rejected invitation from #{@friendship.requester.full_name}"
     else
       flash[:warning] = "You suck"
     end

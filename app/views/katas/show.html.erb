@@ -1,18 +1,53 @@
-<h1 class="kata-title"><%= @kata.title %></h1>
-<% @kata.class.column_names.each do |col| %>
-  <% if col == 'description' %>
-    <p class="kata-value"><%= col %> - <%= @kata.code_description %></p>
-  <% else %>
-    <p class="kata-value"><%= col %> - <%= @kata.send(col.to_sym) %></p>
-  <% end -%>
+<div class="kata-container">
+  <h1 class="kata-title"><%= @kata.title %></h1>
+  <div class="kata-infos">
+    <div class="kata-info">
+      level <%= @kata.level_name %>
+    </div>
+    <div class="kata-info">
+      level <%= @kata.level_name %>
+    </div>
+  </div>
   <hr>
-<% end %>
-
-
+  <div>
+    <%= @kata.code_description %>
+    <hr>
+    <% if current_user.has_solution_for_this_kata?(@kata) %>
+      <p>vos solutions</p>
+      <% current_user.solution_for_this_kata(@kata).each do |sol| %>
+        <p><%= simple_format sol.content %></p>
+      <% end %>
+    <% end %>
+    <hr>
+    <% if current_user.has_friends_who_completed_kata?(@kata) %>
+      <p>Friends who completed this kata</p>
+      <% current_user.friends_who_completed_this_kata(@kata).each do |friend| %>
+        <%= friend.full_name %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 <style type="text/css">
+  .kata-container {
+    width: 70vw;
+    margin: 0 auto;
+    color:  white;
+  }
+
   .kata-title {
     text-align: center;
+  }
+
+  .kata-infos {
+    width: 100%;
+    display: flex;
+    flex-wrap:  wrap;
+  }
+
+  .kata-info {
+
   }
 </style>
 

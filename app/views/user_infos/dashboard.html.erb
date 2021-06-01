@@ -16,6 +16,18 @@
           <%= link_to "Update profile", api_update_user_path(current_user), class: 'profile-btn', method: :patch %>
           <%= link_to "Fetch kata data", fetch_katas_path, class: 'profile-btn', method: :patch %>
           <div>
+            <h6>Friend requests</h6>
+            <ul>
+              <% Friendship.pending_requested_friendships_for(current_user).each do |e| %>
+                <li>
+                  <%= e.requester.full_name %>
+                  <%= link_to accept_friendship_path(e), method: :patch do %><i class="fas fa-user-check"></i><% end %>
+                  <%= link_to reject_friendship_path(e), method: :patch do %><i class="fas fa-user-times"></i><% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div>
             <h6>Your friends</h6>
             <ul>
               <% current_user.friends.each do |e| %>
@@ -24,14 +36,11 @@
             </ul>
           </div>
           <div>
-            <h6>Friend requests</h6>
+            <h6>Requested friendships</h6>
             <ul>
-              <% current_user.pending_friendships.each do |e| %>
+              <% Friendship.pending_requested_friendships_from(current_user).each do |e| %>
                 <li>
-                  <%= e.requester.full_name %>
-                  <%= link_to accept_friendship_path(e), method: :patch do %><span>accept</span><% end %>
-                  <%= link_to reject_friendship_path(e), method: :patch do %><span>reject</span><% end %>
-                </li>
+                  <%= e.recipient.full_name %>
               <% end %>
             </ul>
           </div>

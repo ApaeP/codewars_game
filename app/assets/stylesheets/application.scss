@@ -102,6 +102,21 @@ html {
   }
 }
 
+.friendship-link {
+  color: white;
+  text-decoration: none;
+  transition: all ease 0.2s;
+  i {
+    transition: all ease 0.2s;
+  }
+  &:hover {
+    color: grey;
+    i {
+      scale: 1.2;
+    }
+  }
+}
+
 code {
   border-radius: .25rem;
   color: burlywood;

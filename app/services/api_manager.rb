@@ -29,7 +29,7 @@ class ApiManager
 
   def fetch_page(page)
     request = Net::HTTP::Get.new("#{@base_uri}#{page}")
-    request["Authorization"] = @token
+    # request["Authorization"] = @token
     response = Net::HTTP.start(@base_uri.hostname, @base_uri.port, @request_options) do |http|
       http.request(request)
     end

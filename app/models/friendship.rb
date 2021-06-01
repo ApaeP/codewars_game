@@ -12,7 +12,10 @@
 class Friendship < ApplicationRecord
   belongs_to :requester, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
-  validates  :recipient, uniqueness: { scope: :requester_id }
+  validates  :recipient, uniqueness: { scope: :requester }
+
+  scope :pending_requested_friendships_from, -> (user) {where(requester_id: user.id, status: "pending")}
+  scope :pending_requested_friendships_for,  -> (user) {where(recipient_id: user.id, status: "pending")}
 
   enum status: {
     pending: 0,
@@ -21,15 +24,13 @@ class Friendship < ApplicationRecord
   }
 
   def self.requested?(id1, id2)
-    case1 = !Friendship.where(requester_id: id1, recipient_id: id2).empty?
-    case2 = !Friendship.where(requester_id: id2, recipient_id: id1).empty?
-    case1 || case2
+    !Friendship.where(requester_id: id1, recipient_id: id2).empty? ||
+    !Friendship.where(requester_id: id2, recipient_id: id1).empty?
   end
 
   def self.confirmed_record?(id1, id2)
-    case1 = !Friendship.where(requester_id: id1, recipient_id: id2, status: "accepted").empty?
-    case2 = !Friendship.where(requester_id: id2, recipient_id: id1, status: "accepted").empty?
-    case1 || case2
+    !Friendship.where(requester_id: id1, recipient_id: id2, status: "accepted").empty? ||
+    !Friendship.where(requester_id: id2, recipient_id: id1, status: "accepted").empty?
   end
 
   def self.find_friendship(id1, id2)

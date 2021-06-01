@@ -23,6 +23,7 @@
 #
 class Kata < ApplicationRecord
   has_many :solutions, dependent: :destroy
+  has_many :completers, through: :solutions, source: :user
 
   scope :invalid, -> {where(level: nil)}
   scope :valid,   -> {where.not(level: nil)}
@@ -48,6 +49,10 @@ class Kata < ApplicationRecord
     #   end
     # end
     arr.join.gsub(/\n/, '<br>').html_safe
+  end
+
+  def completed_by
+
   end
 
   # def color # dark

@@ -37,8 +37,7 @@ class User < ApplicationRecord
   has_many :requested_friendships, class_name: 'Friendship', foreign_key: 'requester_id'
   has_many :accepted_friendships, class_name: 'Friendship', foreign_key: 'recipient_id'
 
-
-  has_many :pending_friendships, -> { where(status: "pending") }, class_name: 'Friendship', foreign_key: 'recipient_id'
+  # has_many :pending_friendships, -> { where(status: "pending") }, class_name: 'Friendship', foreign_key: 'recipient_id'
 
   validates :codewars_api_token, presence: true, format: { with: /\A\w{20}\z/, message: "only allows letters" }
   validates :codewars_nickname, presence: true
@@ -49,6 +48,14 @@ class User < ApplicationRecord
     friends_i_invited = Friendship.where(requester_id: id, status: "accepted").pluck(:recipient_id)
     friends_requests = Friendship.where(recipient_id: id, status: "accepted").pluck(:requester_id)
     User.where(id: [friends_i_invited, friends_requests].flatten)
+  end
+
+  def has_friends_who_completed_kata?(kata)
+    kata.completers.any? { |e| e.friend_with?(self) }
+  end
+
+  def friends_who_completed_this_kata(kata)
+    kata.completers.select { |e| e.friend_with?(self) }
   end
 
   def friend_with?(user)
@@ -63,13 +70,16 @@ class User < ApplicationRecord
     solutions.any? { |sol| sol.kata.id = kata.id }
   end
 
+  def solution_for_this_kata(kata)
+    solutions.where(codewars_id: kata.codewars_id)
+  end
+
   def fetch_and_update_infos
     update(UserInfoApi.new(self).user_infos)
   end
 
   def full_name
-    return "noname" unless first_name
-    first_name + ' ' + last_name
+    "#{codewars_nickname}#{first_name.nil? ? " | noname" : " | #{first_name} #{last_name}"}"
   end
 
   def preferred_language

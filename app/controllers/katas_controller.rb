@@ -15,6 +15,11 @@ class KatasController < ApplicationController
   def fetch_katas
     new_solutions = ApiFetcherWorker.perform_now(current_user)
     build_katas
+    # binding.pry
+    if current_user.codewars_password.nil? || current_user.codewars_email.nil?
+      flash[:warning] = "You need to provide your codewars credits in order to retrieve your solutions"
+      return
+    end
     build_solutions(new_solutions)
     flash[:success] = "Vos données ont été mises à jour"
   end
