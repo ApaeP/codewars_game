@@ -13,8 +13,8 @@
         <div class="job">Codewars <%= level_category(current_user.honor) %></div>
 
         <div class="actions">
-          <%= link_to "Update profile", api_update_user_path(current_user), class: 'profile-btn', method: :patch if user_signed_in? %>
-          <%= link_to "Fetch kata data", fetch_katas_path, class: 'profile-btn', method: :patch if user_signed_in? %>
+          <%= link_to "Update profile", api_update_user_path(current_user), class: 'profile-btn', method: :patch %>
+          <%= link_to "Fetch kata data", fetch_katas_path, class: 'profile-btn', method: :patch %>
           <div>
             <h6>Your friends</h6>
             <ul>

@@ -3,7 +3,7 @@ class ApiFetcherWorker < ActiveJob::Base
 
   def perform(user)
     data = ApiManager.new(api_token: user.codewars_api_token, nickname: user.codewars_nickname).fetch_all
-    # data = data.first(3)
+    data = data.first(10)
 
     new_solutions = []
 

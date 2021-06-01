@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :katas, only: [:show, :index]
+  patch 'katas/fetch',                  to: 'katas#fetch_katas', as: :fetch_katas
 
   get   'pages/dashboard',              to: 'user_infos#dashboard', as: :dashboard
 
-  patch 'katas/fetch',                  to: 'katas#fetch_katas', as: :fetch_katas
   post  'request_friendship/:user_id',  to: 'friendships#request_friendship', as: :request_friendship
   patch 'accept_friendship/:id',        to: 'friendships#accept_friendship', as: :accept_friendship
   patch 'reject_friendship/:id',        to: 'friendships#reject_friendship', as: :reject_friendship
