@@ -16,12 +16,11 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
   enable_extension "plpgsql"
 
   create_table "friendships", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.integer "friend_id"
-    t.boolean "confirmed", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_friendships_on_user_id"
+    t.bigint "requester_id"
+    t.bigint "recipient_id"
+    t.integer "status", default: 0
+    t.index ["recipient_id"], name: "index_friendships_on_recipient_id"
+    t.index ["requester_id"], name: "index_friendships_on_requester_id"
   end
 
   create_table "kata", force: :cascade do |t|
@@ -85,7 +84,8 @@ ActiveRecord::Schema.define(version: 2021_05_24_221259) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "recipient_id"
+  add_foreign_key "friendships", "users", column: "requester_id"
   add_foreign_key "solutions", "kata", column: "kata_id"
   add_foreign_key "solutions", "users"
 end

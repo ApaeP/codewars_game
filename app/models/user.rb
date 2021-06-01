@@ -33,9 +33,12 @@ class User < ApplicationRecord
 
   has_many :solutions
   has_many :katas, through: :solutions
-  has_many :friendships
 
-  has_many :pending_friendships, -> { where(confirmed: false) }, class_name: 'Friendship', foreign_key: 'friend_id'
+  has_many :requested_friendships, class_name: 'Friendship', foreign_key: 'requester_id'
+  has_many :accepted_friendships, class_name: 'Friendship', foreign_key: 'recipient_id'
+
+
+  has_many :pending_friendships, -> { where(status: "pending") }, class_name: 'Friendship', foreign_key: 'recipient_id'
 
   validates :codewars_api_token, presence: true, format: { with: /\A\w{20}\z/, message: "only allows letters" }
   validates :codewars_nickname, presence: true
@@ -43,8 +46,8 @@ class User < ApplicationRecord
   after_create :fetch_and_update_infos
 
   def friends
-    friends_i_invited = Friendship.where(user: id, confirmed: true).pluck(:friend_id)
-    friends_requests = Friendship.where(friend_id: id, confirmed: true).pluck(:user_id)
+    friends_i_invited = Friendship.where(requester_id: id, status: "accepted").pluck(:recipient_id)
+    friends_requests = Friendship.where(recipient_id: id, status: "accepted").pluck(:requester_id)
     User.where(id: [friends_i_invited, friends_requests].flatten)
   end
 
@@ -53,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def request_friendship(user)
-    friendships.create(friend_id: user.id)
+    friendships.create(recipient_id: user.id)
   end
 
   def has_solution_for_this_kata?(kata)
