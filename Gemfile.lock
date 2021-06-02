@@ -241,6 +241,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara
+  coderay
   devise
   dotenv-rails
   jbuilder (~> 2.7)

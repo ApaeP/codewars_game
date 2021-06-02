@@ -15,4 +15,8 @@
 class Solution < ApplicationRecord
   belongs_to :user
   belongs_to :kata
+
+  def html_content
+    CodeRay.scan(content, language.to_sym).div(line_numbers: :table, css: :class).html_safe
+  end
 end

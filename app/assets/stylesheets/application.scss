@@ -17,8 +17,8 @@
  *= require_self
  */
 
-@import "config/index";
 @import "variables/index";
+@import "config/index";
 @import "components/index";
 
 
@@ -41,6 +41,8 @@ html {
 .main-container {
   min-height: calc(100vh - (#{$navbar_height} + #{$footer-height}));
   margin: 0 auto;
+  display: inline-block;
+  width: 100vw;
 }
 
 .main-container-content {

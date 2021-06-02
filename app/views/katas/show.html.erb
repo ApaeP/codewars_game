@@ -10,12 +10,12 @@
   </div>
   <hr>
   <div>
-    <%= @kata.code_description %>
+    <%= simple_format @kata.code_description %>
     <hr>
     <% if current_user.has_solution_for_this_kata?(@kata) %>
       <p>vos solutions</p>
       <% current_user.solutions_for_this_kata(@kata).each do |sol| %>
-        <p><%= simple_format sol.content %></p>
+        <p><%= sol.html_content %></p>
       <% end %>
     <% end %>
     <hr>
@@ -27,7 +27,7 @@
         <br>
         <% friend.solutions_for_this_kata(@kata).each do |sol| %>
           <p><%= sol.language.capitalize %></p>
-          <p><%= simple_format sol.content %></p>
+          <p><%= sol.html_content %></p>
         <% end %>
         <hr style="width: 33vw;">
       <% end %>
@@ -40,6 +40,7 @@
     width: 70vw;
     margin: 0 auto;
     color:  white;
+    line-height: 1.7rem;
   }
 
   .kata-title {

@@ -4,9 +4,6 @@ $brown: #786450;
 
 
 .center {
-  // height: 299px;
-  // height: 70vh;
-  // width: 320px;
   height: 100%;
   width: 100%;
   background: #fff;
@@ -15,19 +12,41 @@ $brown: #786450;
   box-shadow: 10px 10px 15px 0 rgba(0,0,0,0.3);
 }
 
+.dashboard {
+  height: calc(100vh - (#{$navbar_height} + #{$footer-height}));
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: 100%;
+  padding: 15px
+}
+
+.user-infos {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  height: 100%;
+}
+
+.katas-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-katas {
+  grid-column: 4 / 10;
+  grid-row: 1 / 1;
+}
+
 .profile {
   float: left;
-  // width: 200px;
   width: 62.5%;
-  // height: 320px;
   text-align: center;
-
   .image {
     position: relative;
     width: 70px;
     height: 70px;
     margin: 38px auto 0 auto;
-
     .circle-1 {
       position: absolute;
       box-sizing: border-box;
@@ -41,7 +60,6 @@ $brown: #786450;
       border-radius: 50%;
       transition: all 1.5s ease-in-out;
     }
-
     .circle-2 {
       @extend .circle-1;
       width: 82px;
@@ -50,26 +68,20 @@ $brown: #786450;
       left: -6px;
       border-color: $brown transparent $brown $brown;
     }
-
     img {
       display: block;
       border-radius: 50%;
       background: #F5E8DF;
     }
-
     &:hover {
       cursor: pointer;
-
       .circle-1 {
         transform: rotate(360deg);
       }
-
       .circle-2 {
         transform: rotate(-360deg);
       }
-
     }
-
   }
 
   .name {
@@ -85,7 +97,6 @@ $brown: #786450;
 
   .actions {
     margin-top: 33px;
-
     .profile-btn {
       display: block;
       width: 120px;
@@ -99,7 +110,6 @@ $brown: #786450;
       box-sizing: border-box;
       transition: all .3s ease-in-out;
       color: $brown;
-
       &:hover {
         background: $brown;
         color: #fff;
@@ -112,7 +122,6 @@ $brown: #786450;
 .stats {
   float: left;
   width: 37.5%;
-
   .box {
     box-sizing: border-box;
     width: 100%;
@@ -122,29 +131,19 @@ $brown: #786450;
     text-align: center;
     padding-top: 28px;
     transition: all .2s ease-in-out;
-
     &:hover {
       background: #E1CFC2;
       cursor: pointer;
     }
-
-    // &:last-child {
-    //   margin: 1px 0;
-    // }
-
   }
-
   span {
     display: block;
   }
-
   .value {
     font-size: 18px;
     font-weight: 600;
   }
-
   .parameter {
     font-size: 11px;
   }
-
 }

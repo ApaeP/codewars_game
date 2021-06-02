@@ -31,57 +31,32 @@ class Kata < ApplicationRecord
   validates :codewars_id, presence: true, uniqueness: true
 
   def code_description
-    pre = ["<pre><code>", "</code></pre>"].cycle
-    code = ["<code>", "</code>"].cycle
-    arr = description.split("```")
-
-    # previous_was_pre = false
-    # (arr.count - 1).times do |i|
-    #   if (arr[i + 1].match?(/\n/) && !previous_was_pre)
-    #     arr[i] << pre.next
-    #     previous_was_pre = true
-    #   elsif previous_was_pre
-    #     arr[i] << pre.next
-    #     previous_was_pre = false
-    #   else
-    #     arr[i] << code.next
-    #     previous_was_pre = false
-    #   end
-    # end
-    arr.join.gsub(/\n/, '<br>').html_safe
+    arr = description.split("```")#.map { |e| e.split(/`/) }
+    arr.map!.with_index do |e, i|
+      if i % 2 == 0
+                      e.split(/`/).map!.with_index do |x, y|
+                        # binding.pry
+                        if y % 2 == 0
+                          x
+                        else
+                          CodeRay.scan(x, :auto).html(wrap: :span, css: :class)
+                        end
+                      end.join
+      else
+        CodeRay.scan(e, :auto).div(css: :class)
+      end
+    end
+    arr.join.html_safe
   end
-
-  def completed_by
-
-  end
-
-  # def color # dark
-  #   return 'hsl(3, 56%, 60%)' unless level_color
-
-  #   { 'white' => 'hsl(0, 0%, 78%)',
-  #     'yellow' => 'hsl(45, 85%, 38%)',
-  #     'blue' => 'hsl(209, 51%, 36%)',
-  #     'purple' => 'hsl(257, 45%, 48%)'
-  #   }[level_color]
-  # end
-
-  # def color # codewars hsl
-  #   return 'hsl(3, 56%, 72%)' unless level_color
-
-  #   { 'white' => 'hsl(0, 0%, 90%)',
-  #     'yellow' => 'hsl(45, 85%, 50%)',
-  #     'blue' => 'hsl(209, 51%, 48%)',
-  #     'purple' => 'hsl(257, 45%, 60%)'
-  #   }[level_color]
-  # end
-
-  # def color # codewars
-  #   return '#df928e' unless level_color
-
-  #   { 'white' => '#e6e6e6',
-  #     'yellow' => '#ecb613',
-  #     'blue' => '#3c7ebb',
-  #     'purple' => '#866cc7'
-  #   }[level_color]
-  # end
 end
+
+
+# def color # codewars hsl
+#   return 'hsl(3, 56%, 72%)' unless level_color
+
+#   { 'white' => 'hsl(0, 0%, 90%)',
+#     'yellow' => 'hsl(45, 85%, 50%)',
+#     'blue' => 'hsl(209, 51%, 48%)',
+#     'purple' => 'hsl(257, 45%, 60%)'
+#   }[level_color]
+# end
