@@ -14,7 +14,7 @@
     <hr>
     <% if current_user.has_solution_for_this_kata?(@kata) %>
       <p>vos solutions</p>
-      <% current_user.solution_for_this_kata(@kata).each do |sol| %>
+      <% current_user.solutions_for_this_kata(@kata).each do |sol| %>
         <p><%= simple_format sol.content %></p>
       <% end %>
     <% end %>
@@ -22,8 +22,14 @@
     <% if current_user.has_friends_who_completed_kata?(@kata) %>
       <p>Friends who completed this kata</p>
       <% current_user.friends_who_completed_this_kata(@kata).each do |friend| %>
+        <hr style="width: 33vw;">
         <%= friend.full_name %>
         <br>
+        <% friend.solutions_for_this_kata(@kata).each do |sol| %>
+          <p><%= sol.language.capitalize %></p>
+          <p><%= simple_format sol.content %></p>
+        <% end %>
+        <hr style="width: 33vw;">
       <% end %>
     <% end %>
   </div>

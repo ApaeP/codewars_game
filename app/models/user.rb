@@ -70,12 +70,13 @@ class User < ApplicationRecord
     solutions.any? { |sol| sol.kata.id = kata.id }
   end
 
-  def solution_for_this_kata(kata)
+  def solutions_for_this_kata(kata)
     solutions.where(codewars_id: kata.codewars_id)
   end
 
   def fetch_and_update_infos
-    update(UserInfoApi.new(self).user_infos)
+    data = UserInfoApi.new(self).user_infos
+    update!(data)
   end
 
   def full_name

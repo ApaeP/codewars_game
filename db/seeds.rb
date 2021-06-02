@@ -14,22 +14,20 @@ User.create!(
   email: 'test@test.com',
   password: 'azerty',
   codewars_nickname: 'ApaeP',
-  codewars_email: 'paulportier@gmail.com',
-  codewars_password: 'antalpol8221',
-  codewars_api_token: 'lolzzzzzzzzzzzzzzzzz')
-  # codewars_api_token: 'pCaCQfbn9zyRkY6ymEWe')
-User.create!(
-  email: "test1@test1.com",
-  password: 'azerty',
-  codewars_api_token: 'lolzzzzzzzzzzzzzzzzz',
-  # codewars_api_token: 'PCaCQfbn9zyRkY6ymEWe',
-  codewars_nickname: "Wulfens",
+  codewars_email: ENV['CODEWARS_EMAIL'],
+  codewars_password: ENV['CODEWARS_PASSWORD'],
+  codewars_api_token: ENV['CODEWARS_API_TOKEN']
 )
-User.create!(
-  email: "test2@test2.com",
-  password: 'azerty',
-  # codewars_api_token: 'zCaCQfbn9zyRkY6ymEWe',
-  codewars_api_token: 'lolzzzzzzzzzzzzzzzzz',
-  codewars_nickname: "Lomig",
-)
+
+%w[Lomig Wulfens Rou97 chaymaISETCH goldangera cbw29512 Sarah soltani marwen3216 prof_noob DolgKreker darlanmendonca dnolan jkempster34 tanzeeb pedantech gdott9 owenbyrne sdanthony Darigaaz Silberbogen Insanitariume tnelson mitjok].each_with_index do |user, i|
+  User.create!(
+    email: "test#{i}@test.com",
+    password: 'azerty',
+    codewars_nickname: user,
+    codewars_email: ENV['codewars_email'],
+    codewars_password: ENV['codewars_password'],
+    codewars_api_token: ENV['CODEWARS_API_TOKEN']
+  )
+end
+
 puts "Records created"

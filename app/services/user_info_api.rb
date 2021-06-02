@@ -15,7 +15,8 @@ class UserInfoApi
 
   def user_infos
     data = fetch_user_infos
-    return unless data
+    return {} if data["success"] == false
+    p data
     data.keys.each { |key| data[key.underscore.to_sym] = data.delete(key) }
     if data[:name]
       data[:first_name] = data[:name].split.first
@@ -29,8 +30,8 @@ class UserInfoApi
     data[:overall_rank_name] = data[:ranks]["overall"]["name"]
     data[:overall_rank_color] = data[:ranks]["overall"]["color"]
     data[:overall_score] = data[:ranks]["overall"]["score"]
-    data[:ranks].delete("overall")
     data[:language_ranks] = data[:ranks]["languages"]
+    data[:ranks].delete("overall")
     data.delete(:ranks)
     data[:katas_authored_count] = data[:code_challenges]["totalAuthored"]
     data[:katas_completed_count] = data[:code_challenges]["totalCompleted"]
