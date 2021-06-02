@@ -50,11 +50,11 @@ class User < ApplicationRecord
     User.where(id: [friends_i_invited, friends_requests].flatten)
   end
 
-  def has_friends_who_completed_kata?(kata)
+  def has_friends_who_completed(kata)
     kata.completers.any? { |e| e.friend_with?(self) }
   end
 
-  def friends_who_completed_this_kata(kata)
+  def friends_who_completed(kata)
     kata.completers.select { |e| e.friend_with?(self) }
   end
 
@@ -66,12 +66,16 @@ class User < ApplicationRecord
     friendships.create(recipient_id: user.id)
   end
 
-  def has_solution_for_this_kata?(kata)
-    solutions.any? { |sol| sol.kata.id = kata.id }
+  def has_solution_for(kata)
+    !solutions.where(kata_id: kata.id).empty?
   end
 
-  def solutions_for_this_kata(kata)
-    solutions.where(codewars_id: kata.codewars_id)
+  def languages_completed_for(kata)
+    solutions.where(kata_id: kata.id).pluck(:language)
+  end
+
+  def solutions_for(kata)
+    solutions.where(kata_id: kata.id)
   end
 
   def fetch_and_update_infos
@@ -84,6 +88,7 @@ class User < ApplicationRecord
   end
 
   def preferred_language
+    # binding.pry
     language_ranks.to_a.sort_by { |k| k.last["score"] }.last[0].capitalize
   end
 end

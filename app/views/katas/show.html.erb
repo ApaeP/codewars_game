@@ -4,28 +4,26 @@
     <div class="kata-info">
       level <%= @kata.level_name %>
     </div>
-    <div class="kata-info">
-      level <%= @kata.level_name %>
-    </div>
   </div>
   <hr>
   <div>
     <%= simple_format @kata.code_description %>
     <hr>
-    <% if current_user.has_solution_for_this_kata?(@kata) %>
+    <% if current_user.has_solution_for(@kata) %>
       <p>vos solutions</p>
-      <% current_user.solutions_for_this_kata(@kata).each do |sol| %>
+      <% current_user.solutions_for(@kata).each do |sol| %>
+        <p><%= sol.language.capitalize %></p>
         <p><%= sol.html_content %></p>
       <% end %>
     <% end %>
     <hr>
-    <% if current_user.has_friends_who_completed_kata?(@kata) %>
+    <% if current_user.has_friends_who_completed(@kata) %>
       <p>Friends who completed this kata</p>
-      <% current_user.friends_who_completed_this_kata(@kata).each do |friend| %>
+      <% current_user.friends_who_completed(@kata).each do |friend| %>
         <hr style="width: 33vw;">
         <%= friend.full_name %>
         <br>
-        <% friend.solutions_for_this_kata(@kata).each do |sol| %>
+        <% friend.solutions_for(@kata).each do |sol| %>
           <p><%= sol.language.capitalize %></p>
           <p><%= sol.html_content %></p>
         <% end %>

@@ -2,6 +2,7 @@
 $coderay-bg:            hsl(220, 13%, 18%);
 $coderay-comment:       hsl(240,  0%, 39%);
 $coderay-fg:            hsl(220, 14%, 71%);
+$coderay-line-bg:       hsl(220, 13%, 20%);
 $coderay-line-number:   hsl(218,  5%, 37%);
 $coderay-yellow:        hsl( 39, 67%, 69%);
 $coderay-orange:        hsl( 29, 54%, 61%);
@@ -25,6 +26,18 @@ table.CodeRay {
   border-collapse: collapse;
   width: 100%;
   padding: 2px;
+  display: block;
+  tbody {
+    display: block;
+    width: 100%;
+    tr {
+      display: flex;
+      .code {
+        overflow-x: auto;
+        flex-grow: 1;
+      }
+    }
+  }
 
   td {
     padding: 2px 4px;
@@ -38,7 +51,7 @@ table.CodeRay {
   border-radius: 5px;
   color: $coderay-fg;
   margin: 5px 0;
-  padding: 0 1rem;
+  // padding: 0 1rem;
 
   br {
     display: block;
@@ -54,7 +67,7 @@ table.CodeRay {
   }
 
   .line-numbers {
-    background-color: $coderay-line-number;
+    background-color: $coderay-line-bg;
     color: $coderay-comment;
     text-align: right;
     -webkit-user-select: none;
@@ -62,7 +75,7 @@ table.CodeRay {
     user-select: none;
 
     a {
-      background-color: $coderay-line-number !important;
+      background-color: $coderay-line-bg !important;
       color: $coderay-comment !important;
       text-decoration: none !important;
 
@@ -73,6 +86,7 @@ table.CodeRay {
 
     pre {
       word-break: normal;
+      background-color: $coderay-line-bg !important;
     }
 
     .highlighted {
@@ -94,6 +108,10 @@ table.CodeRay {
   }
   .code {
     width: 100%;
+    pre {
+      overflow-x: auto;
+      padding: 0 1rem;
+    }
   }
   .debug {
     color: $coderay-bg !important;

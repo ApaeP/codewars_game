@@ -31,22 +31,25 @@ class Kata < ApplicationRecord
   validates :codewars_id, presence: true, uniqueness: true
 
   def code_description
-    arr = description.split("```")#.map { |e| e.split(/`/) }
+    arr = description.split("```")
     arr.map!.with_index do |e, i|
       if i % 2 == 0
-                      e.split(/`/).map!.with_index do |x, y|
-                        # binding.pry
-                        if y % 2 == 0
-                          x
-                        else
-                          CodeRay.scan(x, :auto).html(wrap: :span, css: :class)
-                        end
-                      end.join
+        e.split(/`/).map!.with_index do |x, y|
+          if y % 2 == 0
+            x
+          else
+            CodeRay.scan(x, :auto).html(wrap: :span, css: :class)
+          end
+        end.join
       else
         CodeRay.scan(e, :auto).div(css: :class)
       end
     end
     arr.join.html_safe
+  end
+
+  def completion_percentage
+    (total_completed / (total_attempts / 100.0)).round(1)
   end
 end
 

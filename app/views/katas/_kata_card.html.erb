@@ -6,12 +6,14 @@
       <a href="#">View all chapters <i class="fas fa-chevron-right"></i></a>
     </div>
     <div class="kata-card-info">
-      <div class="kata-card-progress-container <%= (x = current_user.has_solution_for_this_kata?(kata)) ? "solved" : "unsolved" %>">
-        <div class="kata-card-progress"></div>
-        <span class="kata-card-progress-text">
-          <%= x ? "solved" : "unsolved" %>
-        </span>
-      </div>
+      <% if current_user.has_solution_for(kata) %>
+        <div class="kata-card-progress-container <%= (x = current_user.has_solution_for(kata)) ? "solved" : "unsolved" %>">
+          <div class="kata-card-progress"></div>
+          <span class="kata-card-progress-text">
+            <%= "solved in #{current_user.languages_completed_for(kata).join(', ')}" %>
+          </span>
+        </div>
+      <% end %>
       <h6>Kata</h6>
       <h2><%= kata&.title %></h2>
       <%= link_to kata_path(kata) do %>
