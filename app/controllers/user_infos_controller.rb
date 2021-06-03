@@ -13,6 +13,6 @@ class UserInfosController < ApplicationController
   end
 
   def dashboard
-    @katas = current_user.katas.paginate(page: params[:page], per_page: 5)
+    @katas = current_user.katas.paginate(page: params[:page], per_page: 6)
   end
 end
