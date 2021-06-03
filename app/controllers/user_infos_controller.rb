@@ -8,10 +8,6 @@ class UserInfosController < ApplicationController
     end
   end
 
-  def lol
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlol\n\n#{params}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-  end
-
   def show
     @user = User.find(params[:id])
   end

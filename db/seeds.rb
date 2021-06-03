@@ -13,7 +13,7 @@ puts "\nCreate users"
 User.create!(
   email: 'test@test.com',
   password: 'azerty',
-  codewars_nickname: 'ApaeP',
+  codewars_nickname: ENV['CODEWARS_NICKNAME'],
   codewars_email: ENV['CODEWARS_EMAIL'],
   codewars_password: ENV['CODEWARS_PASSWORD'],
   codewars_api_token: ENV['CODEWARS_API_TOKEN']
