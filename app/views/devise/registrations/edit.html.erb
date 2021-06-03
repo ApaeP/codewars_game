@@ -30,7 +30,6 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-
   <div class="field">
     <%= f.label :codewars_nickname %><br />
     <%= f.text_field :codewars_nickname, autofocus: true, autocomplete: "codewars_nickname" %>
@@ -39,6 +38,16 @@
   <div class="field">
     <%= f.label :codewars_api_token %><br />
     <%= f.text_field :codewars_api_token, autofocus: true, autocomplete: "codewars_api_token" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :codewars_email %><br />
+    <%= f.text_field :codewars_email, autofocus: true, autocomplete: "codewars_email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :codewars_password %><br />
+    <%= f.text_field :codewars_password, autofocus: true, autocomplete: "codewars_password" %>
   </div>
 
   <div class="actions">
