@@ -1,0 +1,2 @@
+class RevealedSolutionsController < ApplicationController
+end

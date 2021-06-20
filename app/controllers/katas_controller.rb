@@ -5,17 +5,24 @@ class KatasController < ApplicationController
   end
 
   def index
+    @katas = Kata.all
     if params[:query]
-      @katas = Kata.where(id: 20).paginate(page: params[:page], per_page: 50)
-    else
-      @katas = Kata.valid.order({level: :desc}).paginate(page: params[:page], per_page: 50)
+      @katas = @katas.where('lower(title) LIKE :search OR lower(description) LIKE :search', search: "%#{params[:query].downcase}%")
     end
+    if params[:filter] && params[:filter] != 'all'
+      ids = current_user.katas.pluck(:id)
+      if params[:filter] == 'completed'
+        @katas = @katas.where(id: ids)
+      elsif params[:filter] == 'not_completed'
+        @katas = @katas.where.not(id: ids)
+      end
+    end
+    @katas = @katas.valid.order(level: :desc).paginate(page: params[:page], per_page: 50)
   end
 
   def fetch_katas
     new_solutions = ApiFetcherWorker.perform_now(current_user)
     build_katas
-    # binding.pry
     if current_user.codewars_password.nil? || current_user.codewars_email.nil?
       flash[:warning] = "You need to provide your codewars credits in order to retrieve your solutions"
       return
@@ -46,17 +53,3 @@ class KatasController < ApplicationController
     manager.disconnect_user
   end
 end
-
-
-# fetch_katas
-  # 1 - On recupère les informations d'un user via l'api (ApiFetcherWorker)
-              # qui fetch un hash de katas complétés
-              # qui crée un empty Kata pour chaque nouveau kata trouvé
-              # qui crée une solution pour chaque language de chaque kata trouvé
-            # return an array of new Solutions
-
-  # 2 - Pour chaque nouveau kata
-  #         on met en queue prio n°1 la récupération des données du kata via l'api (KataBuilderWorker)
-
-  # 2 - Pour chaque nouvelle solution
-  #         on met en queue prio n°2 la récupération de la solution en ligne (FetchSolutionsWorker)

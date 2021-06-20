@@ -1,11 +1,19 @@
 <div class="container">
   <%= form_tag(katas_path, :method => "get") do %>
     <%= text_field_tag :query, params[:query], placeholder: "Search katas" %>
+    <%= label :filter, 'All', :value => 'all' %>
+    <%= radio_button_tag(:filter, "all", checked = (params[:filter] == "all" || params[:filter].nil?)) %>
+    <%= label :filter, 'I have completed', :value => 'completed' %>
+    <%= radio_button_tag(:filter, "completed", checked = params[:filter] == "completed") %>
+    <%= label :filter, 'I have not completed', :value => 'not_completed' %>
+    <%= radio_button_tag(:filter, "not_completed", checked = params[:filter] == "not_completed") %>
+
     <%= submit_tag "Search", :name => nil %>
   <% end %>
   <% if user_signed_in? %>
 
     <br>
+    <h2 style="text-align: center;"><%= @katas.count %></h2>
     <%= will_paginate @katas unless @katas.empty? %>
     <br>
     <div class="katas-container">

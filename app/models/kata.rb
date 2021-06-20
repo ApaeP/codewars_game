@@ -23,7 +23,7 @@
 #
 class Kata < ApplicationRecord
   has_many :solutions, dependent: :destroy
-  has_many :completers, through: :solutions, source: :user
+  has_many :completers, -> { distinct }, through: :solutions, source: :user
 
   scope :invalid, -> {where(level: nil)}
   scope :valid,   -> {where.not(level: nil)}
