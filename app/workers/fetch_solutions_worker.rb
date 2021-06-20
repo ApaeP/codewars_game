@@ -1,3 +1,6 @@
+# TODO
+# transform this into a not obstructive job
+
 class FetchSolutionsWorker# < ActiveJob::Base
   # include Sidekiq::Worker
   LOGIN_PAGE = 'https://www.codewars.com/users/sign_in'
